@@ -58,6 +58,6 @@ export class PostController {
         //splice = array.splice(posición, cantidad)
         //desde la posición index, se elimina 1 elemento
         this.posts.splice(index, 1)
-        return res.status(204).send()
+        return res.send("Post deleted succesfully!")
     }
 }
