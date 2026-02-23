@@ -1,0 +1,1 @@
+//tipos del post !!
