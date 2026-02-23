@@ -7,6 +7,7 @@ import cors from "cors"
 import { errorsMiddleware } from "./middlewares/errorsMiddlewares"
 import { PostController } from "./features/posts/post.controller";
 import { PostRouter } from "./features/posts/post.router";
+import { PostService } from "./features/posts/post.service";
 
 const app = express();
 app.use(express.json())
@@ -17,13 +18,18 @@ app.get("/", (req, res) => {
     res.send("Hello, World!!");
 });
 
-
+//todo lo que va en la API se va en este router
 const apiRouter = Router()
 app.use('/', apiRouter)
 
+//post service 
+const postService = new PostService()
+
 //post controller 
 //tiene la logica de post,delete,get
-const postController = new PostController()
+//inyeccion de dependencia desde post service
+//aqui se conecta todo
+const postController = new PostController(postService)
 
 //instancia, hace que se ejcute el constructor
 const postRouter = new PostRouter(postController)

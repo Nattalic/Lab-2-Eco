@@ -1,19 +1,26 @@
 //capa intermedia que nos va a permitir validar
 //validar params
-//aqui vive la logica del codigo
+//decide que responder 
 import { Request, Response } from "express"
 import Boom from "@hapi/boom"
-import { Post } from "./post.types"
+import { PostService } from "./post.service"
 
 
 export class PostController {
-    private posts: Post[]
-    constructor() {
-        this.posts = []
+    //le inyectamos el service
+    //el controller no crea el service, se lo pasamos desde afuera
+
+    private postService: PostService
+    constructor(postService: PostService) {
+        this.postService = postService
     }
 
     getPosts = (req: Request, res: Response) => {
-        return res.json(this.posts)
+        //controller llama al service 
+        //el service devuelve datos 
+        //controller responde en formato http
+        const posts = this.postService.getPosts()
+        return res.json(posts)
 
     }
 
@@ -32,32 +39,27 @@ export class PostController {
             throw Boom.badRequest("Description is required!")
         }
 
-        const newPost: Post = {
-            id: new Date().getTime().toString(),
-            imageUrl: imageUrl.trim(), //trim limpia espacios!
-            title: title.trim(),
-            description: description.trim(),
-        }
+        //crea 3 valores  y se los pasa al service!
+        //el service crea el post completo (agrega id)
+        //devuelve el post creado y se guarda en la variable post
 
-        this.posts.push(newPost)
-        return res.json(newPost)
+        const post = this.postService.createPost({
+            imageUrl,
+            title,
+            description
+        })
+
+        return res.json(post)
     }
 
+
+    //lee el id desde la url y luego llama al service
+    //service decide si existe el id o no
+    //controller solo responde
+
     deletePost = (req: Request, res: Response) => {
-        const { id } = req.params //el id se guarda en req params 
-
-        //aqui se busca si el post existeee
-        //si encuentra el post devuelve la posicion 0 1 2 3 lol
-        //pero si no lo encuentra va a devolver -1, osea que no hay post con ese id, no existe (borrado pues)
-        const index = this.posts.findIndex((p) => p.id === id)
-        if (index === -1) {
-            throw Boom.notFound("Post not found :(") //lanza error
-        }
-
-        //se elimina
-        //splice = array.splice(posición, cantidad)
-        //desde la posición index, se elimina 1 elemento
-        this.posts.splice(index, 1)
-        return res.send("Post deleted succesfully!")
+        const { id } = req.params
+        this.postService.deletePost(String(id))
+        return res.send('Post deleted succesfully!')
     }
 }
