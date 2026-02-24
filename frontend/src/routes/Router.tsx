@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import PostsListPage from "../pages/PostsListPage";
+import CreatePostPage from "../pages/CreatePostPage";
 
 
 const router = createBrowserRouter([
@@ -12,8 +13,8 @@ const router = createBrowserRouter([
         element: <PostsListPage/> 
     },
     { 
-        path: "/create", 
-        //element: <CreatePostPage/> 
+        path: "/createpost", 
+        element: <CreatePostPage/> 
     },
 ]);
 

@@ -36,20 +36,32 @@ export default function PostsListPage() {
 
     return (
         <div className="p-6 ">
-        <h1 className="justify-center text-4xl font-bold mb-4 text-cyan-950">Posts (´・ω・`) </h1>
+        <h1 className="justify-center text-4xl font-semibold mb-10 mt-4 text-pink-700">Posts (´・ω・`) </h1>
 
-        {posts.length === 0 && <p>No posts yet.</p>}
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.length === 0 && (
+        <div className="flex flex-col items-center justify-center h-[60vh] text-center">
+                <p className="text-[30px] font-medium text-base-content/70">
+                No posts yet!
+                </p>
+            <p className="text-[17px] text-base-content/50 mt-2">
+                Click the + button to create your first one :D
+            </p>
+        </div>
+)}
+        <div className="gap-16 grid lg:grid-cols-4">
             {posts.map((post) => (
             <PostCard key={post.id} post={post} onDelete={handleDelete} />
             ))}
         </div>
 
-        {/* burbuja + */}
+        {/* burbuja !! */}
         <Link
-            to="/create"
-            className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-pink-600 text-white text-3xl pb-1.5 flex items-center justify-center shadow-lg hover:-translate-y-2 transition"
+            to="/createpost"
+            className="fixed bottom-10 
+            right-10 w-17 h-17 rounded-full
+            bg-pink-600 text-white text-3xl
+            pb-1.5 flex items-center justify-center 
+            shadow-lg hover:-translate-y-2 transition"
         >
             +
         </Link>
