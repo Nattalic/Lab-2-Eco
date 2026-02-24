@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import PostsListPage from "../pages/PostsListPage";
 import CreatePostPage from "../pages/CreatePostPage";
 
-
+//rutas!!
 const router = createBrowserRouter([
     {
         path: "/",
