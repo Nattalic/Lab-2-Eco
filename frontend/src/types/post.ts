@@ -1,1 +1,7 @@
-//tipos del post !!
+export interface Post {
+    id: string,
+    title: string,
+    imageUrl: string,
+    description: string
+}
+

@@ -7,9 +7,9 @@ import { PostService } from "./post.service"
 
 
 export class PostController {
+
     //le inyectamos el service
     //el controller no crea el service, se lo pasamos desde afuera
-
     private postService: PostService
     constructor(postService: PostService) {
         this.postService = postService
@@ -52,9 +52,8 @@ export class PostController {
         return res.json(post)
     }
 
-
     //lee el id desde la url y luego llama al service
-    //service decide si existe el id o no
+    //service decide si existe el id o no (la logicaa)
     //controller solo responde
 
     deletePost = (req: Request, res: Response) => {

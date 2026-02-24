@@ -1,1 +1,0 @@
-//funciones fetch como get post y deleteee

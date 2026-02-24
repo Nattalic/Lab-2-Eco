@@ -13,6 +13,7 @@ export interface Post {
 //el id se asigna en la base de datos
 //interfaz que permite transportar informacion
 //representa lo que llega desde el frontend
+
 export interface CreatePostDTO   {
     imageUrl: string
     title: string

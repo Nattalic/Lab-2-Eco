@@ -2,7 +2,7 @@ import { CreatePostDTO, Post } from "./post.types";
 
 import Boom from "@hapi/boom"
 
-//el servicio hace el trabajo real: crea post, get, delete, validar reglas 
+//el servicio hace el trabajo real; crea post, get, delete, validar reglas 
 //el servicio es una clase y capa donde se pones la logica y el manejo de datos, pero sin cosas de HTTP (esto va en el controller)
 //es el cerebro (?)
 
@@ -40,6 +40,7 @@ export class PostService {
         if (!postFound) {
             throw Boom.notFound("Post not found :( ")
         }
+        
         //filter = busca el id que quiero eliminar
         //si el id existe, lo borra con filter (se queda con todos menos ese )
         // filtreme todos los usuarios tal que su id sea diferente al que yo seleccione
